@@ -23,8 +23,9 @@ const Footer = (props) =>
         <div>
             <Paper className={classes.root} elevation={0}>
                 <Typography component="p">
-                    <p>카카오톡 API와 React, Material-UI로 만들었습니다.</p>
-                    <p>@Rudy_Kim</p>
+                    <a href="https://cpro95.tistory.com/50"><p>원본 소스 출처</p></a>
+                    <p>배포자 @Rudy_Kim</p>
+                    <p>개발중 ~ing</p>
                 </Typography>
             </Paper>
         </div>
