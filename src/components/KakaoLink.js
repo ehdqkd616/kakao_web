@@ -55,7 +55,8 @@ const KakaoLink = (props) =>
                 sendLink(res.infos.original.url);
             });
         } else {
-            sendLink(""); // url to blank
+            //sendLink(""); // url to blank
+            sendLink("http://kakao-web-artrudy.netlify.app/"); // 클릭시 URL
         }
     };
 
