@@ -24,6 +24,7 @@ const Footer = (props) =>
             <Paper className={classes.root} elevation={0}>
                 <Typography component="p">
                     <a href="https://cpro95.tistory.com/50"><p>원본 소스 출처</p></a>
+                    <a href="https://github.com/ehdqkd616"><p>배포자 깃허브 주소</p></a>
                     <p>배포자 @Rudy_Kim</p>
                     <p>개발중 ~ing</p>
                 </Typography>

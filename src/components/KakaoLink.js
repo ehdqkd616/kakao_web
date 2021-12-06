@@ -37,6 +37,23 @@ const KakaoLink = (props) =>
     const [text, setText] = useState("");
     const [files, setFiles] = useState([]);
     const [localUrl, setLocalUrl] = useState("");
+    const [textCount, setTextCount] = useState(0);
+
+    // 텍스트 값 변화시 실행될 함수
+    const textChange = (e) =>
+    {
+        setText(e.target.value);
+        setTextCount(byteLength(e.target.value));
+    }
+
+    // 바이트 길이 계산 함수
+    const byteLength = (string) =>
+    {
+        return string
+            .split('')
+            .map(s => s.charCodeAt(0))
+            .reduce((prev, c) => (prev + ((c === 10) ? 2 : ((c >> 7) ? 2 : 1))), 0); // 계산식에 관한 설명은 위 블로그에 있습니다.
+    }
 
     const handleSubmit = (e) =>
     {
@@ -109,6 +126,7 @@ const KakaoLink = (props) =>
         setText("");
         setFiles([]);
         setLocalUrl("");
+        setTextCount(0);
     };
 
     const clean = () =>
@@ -116,6 +134,7 @@ const KakaoLink = (props) =>
         setText("");
         setFiles([]);
         setLocalUrl("");
+        setTextCount(0);
     };
 
     return (
@@ -124,7 +143,7 @@ const KakaoLink = (props) =>
                 id="outlined-full-width"
                 label="메시지"
                 style={{ margin: 8 }}
-                placeholder="한번에 200자까지만 전송 가능 (이미지 첨부할 경우 100자만 가능)"
+                placeholder="한번에 135 바이트 까지만 전송 가능 (이미지 첨부할 경우 60 바이트만 가능, 엔터 입력시 입력 가능 문자수 더 적어짐. 4줄 최대)"
                 fullWidth
                 autoFocus
                 multiline
@@ -135,9 +154,23 @@ const KakaoLink = (props) =>
                     shrink: true,
                 }}
                 value={text}
-                onChange={(e) => setText(e.target.value)}
+                // onChange={(e) => setText(e.target.value)}
+                onChange={(e) => textChange(e)}
             />
             <div>
+                <TextField
+                    type="text"
+                    id="standard-basic"
+                    label="글자수"
+                    margin="normal"
+                    variant="standard"
+                    fullWidth
+                    inputProps={
+                        { readOnly: true, }
+                    }
+                    value={textCount}
+                />
+
                 <Button variant="outlined" color="primary" onClick={(e) => clean()}>
                     다시 쓰기
                 </Button>
